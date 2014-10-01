@@ -19,7 +19,7 @@
   "content_scripts": [{
       "matches": [ "http://github.com/*", "https://github.com/*" ],
       "css": [ "css/sidebar.css" ],
-      "js": [ "js/jquery-2.1.1.min.js", "js/handlebars-v2.0.0.js", "js/adapter.github.js", "js/main.js"]
+      "js": [ "js/main.js" ]
   }],
   "web_accessible_resources": [ "js/*", "html/*", "css/*", "images/*", "fonts/*" ],
   "content_security_policy": "script-src 'self'; object-src 'self'; font-src *"
