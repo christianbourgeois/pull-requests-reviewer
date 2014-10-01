@@ -3,7 +3,7 @@
   "version": "1.0",
   "manifest_version": 2,
   "author": "Remy Giard",
-  "description": "Tool to navigate through the pull requests of a github repository.",
+  "description": "Tool to navigate through the pull requests of a Github repository.",
   "icons": { "128": "images/icon.png" },
   "browser_action": {
     "default_icon": "images/icon.png",
