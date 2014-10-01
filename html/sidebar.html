@@ -1,11 +1,28 @@
-<div class="panel panel-default">
-  <div class="panel-heading">Pull requests</div>
-  <div class="panel-body">
-    <ol id="pull-requests" class="list-group">
-      <li class="list-group-item">
-        <span class="badge">14</span>
-        Cras justo odio
+<div id="pr_icon">
+  <a class="pr-toggle"><strong>&lt;</strong> Show</a>
+</div>
+
+<div id='pr_sidebar'>
+  <div class="content">
+    <h4>Pull requests</h4>
+  </div>
+  <ul id="pull_requests" class="table-list table-list-bordered table-list-issues">
+    {{#each pullRequests }}
+      <li class="selectable table-list-item" data-pr-id="{{ id }}">
+        <div class="table-list-cell">
+          <a class="issue-title-link">{{ title }}</a>
+          <div class="issue-meta">
+            <span class="issue-meta-section">#{{ id }} {{ author }}</span>
+          </div>
+        </div>
+        <div class="table-list-cell issue-comments">
+          <span class="octicon octicon-comment"></span>
+          {{ nbNotifications }}
+        </div>
       </li>
-    </ol>
+    {{/each}}
+  </ul>
+  <div class="content">
+    <a class="pr-toggle">hide</a>
   </div>
 </div>

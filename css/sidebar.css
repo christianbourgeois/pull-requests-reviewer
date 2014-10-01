@@ -1,7 +1,56 @@
-#pr_sidebar {
+#pr_sidebar, #pr_icon {
   position: fixed;
   top: 1em;
-  right: 1px;
-  width: 500px;
+  right: -600px;
+  width: 600px;
   z-index: 1000;
+  background-color: #fafafa;
+  border: 1px solid #e5e5e5;
+  transition: right 0.5s ease-out;
+}
+
+.pr-toggle {
+  cursor: pointer;
+}
+
+#pr_icon {
+  right: 1px;
+  padding: 10px;
+  width: 80px;
+}
+
+.pr-ext-toggle #pr_icon {
+  right: -80px;
+}
+
+.pr-ext-toggle #pr_sidebar {
+  right: 1px;
+}
+
+
+#pr_sidebar .content {
+  padding: 6px;
+  margin: 0;
+}
+
+#pr_sidebar h4 {
+  padding: 0;
+  margin: 0;
+}
+
+#pr_sidebar li {
+}
+
+#pr_sidebar .selectable {
+  cursor: pointer;
+}
+
+#pr_sidebar .table-list-cell {
+  padding: 2px 6px 1px 6px;
+  margin: 0;
+  font-size: 10px;
+}
+
+#pr_sidebar .table-list-cell a {
+  font-size: 12px;
 }
