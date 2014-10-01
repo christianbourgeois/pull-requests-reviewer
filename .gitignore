@@ -1,0 +1,4 @@
+.idea
+build
+mykey.pem
+node_modules
