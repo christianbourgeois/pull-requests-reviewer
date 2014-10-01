@@ -1,0 +1,7 @@
+#pr_sidebar {
+  position: fixed;
+  top: 1em;
+  right: 1px;
+  width: 500px;
+  z-index: 1000;
+}
