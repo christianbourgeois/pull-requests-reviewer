@@ -38,10 +38,8 @@
   margin: 0;
 }
 
-#pr_sidebar li {
-}
-
-#pr_sidebar .selectable {
+#pr_sidebar li:hover {
+  background-color: #dfdfdf;
   cursor: pointer;
 }
 

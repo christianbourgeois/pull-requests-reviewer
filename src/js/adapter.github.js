@@ -16,7 +16,6 @@ repository.pullRequests().then(function(prs) {
 
 module.exports = {
   findPullRequests: function() {
-
       return repository.pullRequests().then(function(prs) {
           console.log("Pull Request Raw - %o", prs);
           var result = prs.map(function(pr) {
