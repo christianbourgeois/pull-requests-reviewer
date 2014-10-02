@@ -44,11 +44,15 @@
     });
   }
 
-
   function bindToggleHandler() {
     $("#pr-extension .pr-toggle").off('click');
     $("#pr-extension .pr-toggle").on('click', function() {
       $('#pr-extension').toggleClass('pr-ext-toggle');
+    });
+
+    $("#pr-extension .pr-config-toggle").off('click');
+    $("#pr-extension .pr-config-toggle, #token_cancel").on('click', function() {
+      $('#pr-extension').toggleClass('configuring');
     });
   }
 

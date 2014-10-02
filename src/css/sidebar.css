@@ -4,7 +4,7 @@
   right: -600px;
   width: 600px;
   z-index: 1000;
-  background-color: #fafafa;
+  background-color: #ffffff;
   border: 1px solid #e5e5e5;
   transition: right 0.5s ease-out;
 }
@@ -27,6 +27,22 @@
   right: 1px;
 }
 
+#pr-extension.configuring #pr_list {
+  display: none;
+}
+
+#pr-extension #pr_config {
+  display: none;
+  padding: 6px;
+}
+
+#pr-extension #pr_config input {
+  width: 300px;
+}
+
+#pr-extension.configuring #pr_config {
+  display: block;
+}
 
 #pr_sidebar .content {
   padding: 6px;
