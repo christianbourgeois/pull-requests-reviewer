@@ -37,9 +37,12 @@
   }
 
   function refreshSidebar() {
-    var data = { pullRequests: github.findPullRequests() };
-    $("#pr-extension").html(sidebarTemplate(data));
-    bindEvents();
+    github.findPullRequests().then(function(prs) {
+        console.log("Pull Request findPullRequests - %o", prs);
+        var data = { pullRequests: prs };
+        $("#pr-extension").html(sidebarTemplate(data));
+        bindEvents();
+    });
   }
 
 
