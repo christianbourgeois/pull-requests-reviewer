@@ -1,6 +1,4 @@
 (function(module) {
-    console.log('GITHUB SCRIPT LOADED!');
-
     var $ = require('./libs/jquery-2.1.1.min');
 
     var API_URL = 'https://api.github.com';
@@ -14,10 +12,10 @@
             return new Repository(token, username, repository);
         }
     }
-//6093
+
     function Repository(token, username, repository) {
         this.pullRequests = function() {
-            var url = API_URL + '/repos/' + username + '/' + repository + '/pulls';
+            var url = API_URL + '/repos/' + username + '/' + repository + '/pulls?per_page=100';
             return request(token, url);
         }
     }
@@ -30,7 +28,8 @@
                 'Authorization': 'token ' + token,
                 'Content-Type': 'application/json;charset=UTF-8'
             },
-            success: function(data) {
+            success: function(data, textStatus, jqXHR) {
+                console.log("Response Header - %o", jqXHR.getResponseHeader('Link'));
                 deferred.resolve(data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
