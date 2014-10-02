@@ -5,7 +5,6 @@
   $(document).ready(function() {
     compileTemplates().then(function() {
       injectSidebar();
-      refreshSidebar();
     });
   });
 
@@ -33,10 +32,6 @@
 
   function injectSidebar() {
     $("body").append("<div id='pr-extension'></div>");
-    $("#pr-extension").html(sidebarTemplate({}));
-  }
-
-  function refreshSidebar() {
     var data = { pullRequests: github.findPullRequests() };
     $("#pr-extension").html(sidebarTemplate(data));
     bindEvents();
@@ -52,10 +47,8 @@
 
   function bindEvents() {
     $("#pr_sidebar #pull_requests li").click(function() {
-      var id = $(this).attr("data-pr-id");
-      github.openPullRequest(id);
-    }).hover(function() {
-      $(this).addClass();
+      var url = $(this).attr("data-pr-url");
+      github.openPullRequest(url);
     });
 
     bindToggleHandler();
