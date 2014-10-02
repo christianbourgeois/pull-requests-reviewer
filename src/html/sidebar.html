@@ -3,28 +3,38 @@
 </div>
 
 <div id='pr_sidebar'>
-  <div class="content">
-    <h4>Pull requests</h4>
-  </div>
-  <ul id="pull_requests" class="table-list table-list-bordered table-list-issues">
-    {{#each pullRequests }}
-      <li class="selectable table-list-item" data-pr-url="{{ url }}">
-        <div class="table-list-cell">
-          <span class="issue-title-link">{{ title }}</span>
-          <div class="issue-meta">
-            <span class="issue-meta-section">#{{ id }} {{ author }}</span>
+  <div id="pr_list">
+    <div class="content">
+      <h4>Pull requests</h4>
+      <a class="pr-config-toggle">config</a>
+    </div>
+    <ul id="pull_requests" class="table-list table-list-bordered table-list-issues">
+      {{#each pullRequests }}
+        <li class="selectable table-list-item" data-pr-url="{{ url }}">
+          <div class="table-list-cell">
+            <span class="issue-title-link">{{ title }}</span>
+            <div class="issue-meta">
+              <span class="issue-meta-section">#{{ id }} {{ author }}</span>
+            </div>
           </div>
-        </div>
-        <div class="table-list-cell issue-comments">
-          {{#if nbNotifications }}
-            <span class="octicon octicon-comment"></span>
-            {{ nbNotifications }}
-          {{/if}}
-        </div>
-      </li>
-    {{/each}}
-  </ul>
-  <div class="content">
-    <a class="pr-toggle">hide</a>
+          <div class="table-list-cell issue-comments">
+            {{#if nbNotifications }}
+              <span class="octicon octicon-comment"></span>
+              {{ nbNotifications }}
+            {{/if}}
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+    <div class="content">
+      <a class="pr-toggle">hide</a>
+    </div>
+  </div>
+  <div id="pr_config">
+    <h4>Configuration</h4>
+    <p>For private repositories, we need an access token that you can generate in the <a href="/settings/applications">setting page</a>.</p>
+    <input id="github_token" type="text" placeholder="Paste your Github token here"/>
+    <a class="minibutton sidebar-button" id="token_save">Save</a>
+    <a id="token_cancel">cancel</a>
   </div>
 </div>
