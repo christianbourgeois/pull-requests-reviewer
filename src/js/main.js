@@ -32,9 +32,16 @@
 
   function injectSidebar() {
     $("body").append("<div id='pr-extension'></div>");
-    var data = { pullRequests: github.findPullRequests() };
-    $("#pr-extension").html(sidebarTemplate(data));
-    bindEvents();
+    $("#pr-extension").html(sidebarTemplate({}));
+  }
+
+  function refreshSidebar() {
+    github.findPullRequests().then(function(prs) {
+        console.log("Pull Request findPullRequests - %o", prs);
+        var data = { pullRequests: prs };
+        $("#pr-extension").html(sidebarTemplate(data));
+        bindEvents();
+    });
   }
 
 

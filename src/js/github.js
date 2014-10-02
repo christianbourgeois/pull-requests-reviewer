@@ -3,27 +3,43 @@
 
     var $ = require('./libs/jquery-2.1.1.min');
 
-    module.exports = function(username, password) {
-        return new GitHub();
-    }
+    var API_URL = 'https://api.github.com';
 
-    function GitHub() {
+    module.exports = function(token) {
+        return new GitHub(token);
+    };
+
+    function GitHub(token) {
         this.repository = function(username, repository) {
-            return new Repository();
+            return new Repository(token, username, repository);
+        }
+    }
+//6093
+    function Repository(token, username, repository) {
+        this.pullRequests = function() {
+            var url = API_URL + '/repos/' + username + '/' + repository + '/pulls';
+            return request(token, url);
         }
     }
 
-    var values = [
-        { title: "Import UIF in orange theme", id: 6081, labels: ["Frontend", "Need UI Review", "Ready To Merge"], author: "rgiard", nbNotifications: 10, url: "https://github.com/AppDirect/AppDirect/pull/6081" },
-        { title: "[RtM] TPMEU-1129, ZD-8460 Translate Bundles and remove swedish", id: 6079, labels: [], author: "yluron", nbNotifications: 1, url: "https://github.com/AppDirect/AppDirect/pull/6079" }
-    ];
-
-    function Repository() {
-        this.pullRequests = function() {
-            var deferred = $.Deferred();
-            deferred.resolve(values);
-            return deferred.promise();
-        }
+    function request(token, url) {
+        var deferred = $.Deferred();
+        var settings = {
+            headers: {
+                'Accept': 'application/vnd.github.raw+json',
+                'Authorization': 'token ' + token,
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            success: function(data) {
+                deferred.resolve(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error("%s - %s", textStatus, errorThrown);
+                deferred.reject();
+            }
+        };
+        $.ajax(url, settings);
+        return deferred.promise();
     }
 
 
