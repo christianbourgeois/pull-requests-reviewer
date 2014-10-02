@@ -1,3 +1,10 @@
+var Github = require('./github');
+var github = Github('username', 'password');
+var repository = github.repository('AppDirect', 'AppDirect');
+repository.pullRequests().then(function(prs) {
+    console.log("Pull Request - %o", prs);
+});
+
 module.exports = {
   findPullRequests: function() {
     return [
