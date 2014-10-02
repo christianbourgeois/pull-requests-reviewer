@@ -135,7 +135,10 @@ module.exports = function(grunt) {
   // DEFAULT
   //
 
-  grunt.registerTask('default', ['clean', 'test', 'mkdir:unpacked', 'copy:main', 'manifest',
-    'mkdir:js', 'browserify', 'copy:prod', 'uglify', 'exec', 'circleci']);
+//  grunt.registerTask('default', ['clean', 'test', 'mkdir:unpacked', 'copy:main', 'manifest',
+//    'mkdir:js', 'browserify', 'copy:prod', 'uglify', 'exec', 'circleci']);
+
+    grunt.registerTask('default', ['clean', 'test', 'mkdir:unpacked', 'copy:main', 'manifest',
+        'mkdir:js', 'browserify']);
 
 };

@@ -16,7 +16,14 @@
     function Repository(token, username, repository) {
         this.pullRequests = function() {
             var url = API_URL + '/repos/' + username + '/' + repository + '/pulls?per_page=100';
-            return request(token, url);
+            return request(token, url).then(function(response) {
+                if (response.links.next) {
+                    return request(token, response.links.next).then(function(r) {
+                        return $.merge(response.data, r.data);
+                    });
+                }
+                return response.data;
+            });
         }
     }
 
@@ -29,8 +36,12 @@
                 'Content-Type': 'application/json;charset=UTF-8'
             },
             success: function(data, textStatus, jqXHR) {
-                console.log("Response Header - %o", jqXHR.getResponseHeader('Link'));
-                deferred.resolve(data);
+                var links = parseLinkHeader(jqXHR.getResponseHeader('Link'));
+                console.log("Response Header - %o", links);
+                deferred.resolve({
+                    links: links,
+                    data: data
+                });
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error("%s - %s", textStatus, errorThrown);
@@ -39,6 +50,26 @@
         };
         $.ajax(url, settings);
         return deferred.promise();
+    }
+
+    function parseLinkHeader(header) {
+        if (header.length == 0) {
+            throw new Error("input must not be of zero length");
+        }
+        // Split parts by comma
+        var parts = header.split(',');
+        var links = {};
+        // Parse each part into a named link
+        $.each(parts, function(index, p) {
+            var section = p.split(';');
+            if (section.length != 2) {
+                throw new Error("section could not be split on ';'");
+            }
+            var url = section[0].replace(/<(.*)>/, '$1').trim();
+            var name = section[1].replace(/rel="(.*)"/, '$1').trim();
+            links[name] = url;
+        });
+        return links;
     }
 
 
